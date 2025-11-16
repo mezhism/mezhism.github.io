@@ -1,0 +1,583 @@
+/* 全局 */
+body {
+    margin: 0;
+    font-family: 'Muli', sans-serif;
+    background-color: #fdfbf5; /* 米白背景 */
+    color: #333;
+}
+
+/* 導覽列 */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0dee8; /* 粉色系 */
+    padding: 0.5rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-right {
+    display: flex;
+    padding: 1rem 4rem; /* 左右內距 */
+    gap: 1rem;
+}
+
+.navbar-right a {
+    text-decoration: none;
+    color: #0a0c0a;
+    font-weight: 500;
+}
+
+.navbar-right a:hover {
+    opacity: 0.7;
+}
+
+/* 手機版 */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-right {
+        display: none; /* 初始隱藏選單 */
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+        background-color: #fdfbf5;
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .navbar-right.show {
+        display: flex;
+    }
+
+    .navbar-right a {
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+/* 區塊標題 */
+.section-title {
+    font-size: 2rem;
+    color: #0a0c0a;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Home 區塊背景 */
+#home {
+    display: flex;                   /* 左右排列 */
+    align-items: center;             /* 垂直置中 */
+    justify-content: center;         /* 水平置中 */
+    height: 90vh;                   /* 滿屏高度 */
+    padding: 4rem 2rem;
+    position: relative;
+    background-image: url('my.img/home.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* 半透明遮罩 */
+#home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+/* 左右內容在遮罩之上 */
+.home-left,
+.home-right {
+    position: relative;
+    z-index: 2;
+}
+
+/* 左側區塊比例 2 */
+.home-left {
+    flex: 2;                        /* 左右比例 2:1 */
+    min-height: 400px;
+    position: relative;
+    padding: 0 2rem;
+
+}
+
+/* 前景圖疊上左側 */
+.home-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("my.img/1.mag.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+    z-index: 5;
+}
+
+
+/* 右側區塊比例 1 */
+.home-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+}
+
+/* 右側文字 */
+.home-right h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #1f1e1e;
+}
+.home-right h1 {
+    overflow: hidden; 
+    border-right: 2px solid #1f1e1e; /* 光標 */
+    white-space: nowrap;
+    animation: typing 2s steps(20) forwards, blink 0.75s step-end infinite alternate;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.home-right p {
+    font-size: 1.2rem;
+    max-width: 500px;
+    color: #272626;
+}
+
+/* info-box 毛玻璃效果 */
+.info-box {
+    padding: 2rem;
+    border: 2px solid #c9c9c9;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    margin-top: 1rem;
+}
+
+/* About 區塊背景圖片 */
+#about {  
+    background-image: url('my.img/about.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 2rem 2rem 4rem 2rem; /* 上下內距調整，上面改成 2rem，原本是 4rem */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 兩列 → 2x2 排列 */
+    gap: 2rem;
+}
+
+/* About Me 主標題 */
+.about-main-title {
+    grid-column: 1 / -1;       /* 仍跨兩列 */
+    text-align: center;         /* 文字置中 */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transform: translateY(-12px); /* 整個標題往上移 10px */
+
+}
+
+.about-main-title span {
+    display: inline-block;      /* 文字底色只包住文字 */
+    color: #fdf6e3;             /* 淺米色文字 */
+    background-color: #372f3f;  /* 底色 */
+    padding: 0.5rem 1rem;       /* 上下左右間距 */
+    border-radius: 8px;         /* 圓角 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* 文字陰影 */
+}
+
+/* 共用區塊樣式 */
+.about-block {
+    position: relative; /* 讓蝴蝶結絕對定位 */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #333;
+    background-color: rgba(253, 251, 245, 0.95); /* 統一顏色，高透明度 */
+    transition: all 0.3s ease;
+    transform: translateY(-30px); /* 往上移 20px，可依需求調整 */
+
+}
+
+/* 蝴蝶結小圖標 */
+.block-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem; /* 大小可調整 */
+    transition: transform 0.3s ease;
+}
+
+/* 滑鼠移入板塊效果 */
+.about-block:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    background-color: rgba(253, 251, 245, 1);
+}
+
+/* 滑鼠移入蝴蝶結動畫 */
+.about-block:hover .block-icon {
+    transform: rotate(-15deg) scale(1.2);
+}
+
+/* 區塊小標題 */
+.section-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* 區塊文字排版 */
+.about-block p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+
+}
+
+/* Education & Experience 區塊 */
+#education-experience {  
+    background-image: url('my.img/education.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 2rem 2rem 4rem 2rem;
+    display: grid;           /* 使用 grid 方便標題置中 */
+    justify-items: center;   /* 水平置中內容 */
+    row-gap: 2rem;           /* 標題與內容間距 */
+}
+
+/* 主標題底色 */
+.edu-exp-main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transform: translateY(30px); /* 可調整位置 */
+}
+
+.edu-exp-main-title span {
+    display: inline-block;        /* 文字底色只包文字 */
+    color: #372f3f;               /* 淺米色文字 */
+    background-color: #f6e0e0;    /* 底色 */
+    padding: 0.5rem 1rem;         /* 上下左右間距 */
+    border-radius: 8px;           /* 圓角 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* 文字陰影 */
+}
+
+/* 左右容器 grid */
+.edu-exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 左右比例 1:3 */
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;       /* 限制最大寬度 */
+}
+
+/* 左側學歷板塊 */
+.education-block {
+    background-color: rgba(253, 251, 245, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* 右側經歷容器 */
+.edu-exp-experience {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); /* 上下排列兩個板塊 */
+    gap: 2rem;
+}
+
+/* 經歷板塊 */
+.experience-block {
+    background-color: rgba(253, 251, 245, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* hover 微浮動效果 */
+.education-block:hover,
+.experience-block:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* 小標題與文字 */
+.section-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.subheading {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+/* 讓 edu-exp-grid 使用 flex 方便高度對齊 */
+.edu-exp-grid {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    align-items: stretch; /* 左右板塊高度拉滿 */
+}
+
+/* 左側學歷板塊 */
+.education-block {
+    flex: 1; /* 左側佔比例 1 */
+    background-color: rgba(253, 251, 245, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* 右側經歷容器 */
+.edu-exp-experience {
+    flex: 3; /* 右側佔比例 3 */
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); /* 上下排列兩個板塊 */
+    gap: 2rem;
+}
+
+/* 經歷板塊 */
+.experience-block {
+    background-color: rgba(253, 251, 245, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* hover 微浮動效果 */
+.education-block:hover,
+.experience-block:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+#skills {
+    align-items: center;             /* 垂直置中 */
+    justify-content: center;         /* 水平置中 */
+    height: 80vh;   
+    background-image: url('my.img/skill.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 主標題 */
+.skills-main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.skills-main-title span {
+    display: inline-block;
+    background-color: #372f3f;
+    color: #fdf6e3;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 水平排列板塊 */
+.skills-grid {
+    display: flex;
+    flex-wrap: nowrap; /* 禁止換行 */
+    gap: 1.5rem; /* 板塊間距，可調整 */
+    justify-content: space-between; /* 四塊平均分布 */
+}
+
+.skill-block h3 {
+    text-align: center;
+}
+
+
+/* 每個板塊 */
+.skill-block {
+    background-color: rgba(253, 251, 245, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    width: 22%; /* 四塊平分一行空間 */
+    min-width: 200px; /* 防止過小 */
+}
+
+/* hover 微浮動效果 */
+.skill-block:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* 響應式 */
+@media (max-width: 1200px) {
+    .skill-block {
+        width: 45%; /* 一行兩個板塊 */
+    }
+}
+
+@media (max-width: 768px) {
+    .skill-block {
+        width: 100%; /* 單列直排 */
+    }
+}
+
+
+/* ===== 作品集主標題 —— 跟前面一致 ===== */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.section-title span {
+    display: inline-block;
+    background-color: #372f3f; /* 深紫 */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-shadow: 2px 2px 4px rgba(245, 202, 232, 0.3);
+}
+
+/* ===== 作品集主標題 ===== */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: #372f3f; /* 深紫色 */
+}
+
+.section-title span {
+    display: inline; /* 不需要背景，所以不用 inline-block */
+    color: inherit;  /* 繼承父元素深紫色 */
+    background: none; /* 移除背景 */
+    border: none;     /* 移除邊框 */
+    padding: 0;       /* 移除內距 */
+    border-radius: 0; /* 移除圓角 */
+    text-shadow: none; /* 移除陰影 */
+}
+
+
+/* ===== 作品集整體區塊 ===== */
+#portfolio {
+    padding: 5rem 2rem;
+    background-image: url('my.img/home.jpg'); /* 換成你的背景圖 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+/* ===== 每組作品包裝盒 ===== */
+.portfolio-group {
+    margin-bottom: 3rem;
+}
+
+/* ===== 每一行作品整組框 ===== */
+.portfolio-row {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; 
+    margin-bottom: 1rem;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    background-color: rgba(253, 251, 245, 0.7); /* 淡黃色半透明行框 */
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* ===== 圖片樣式（保持原比例） ===== */
+.portfolio-img {
+    width: auto;
+    max-width: 280px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease;
+}
+
+/* ===== 滑鼠滑過圖片放大 ===== */
+.portfolio-img:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== 文字敘述框 ===== */
+.portfolio-text {
+    max-width: 300px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #372f3f;
+    padding: 1rem 1.3rem;
+    border-radius: 10px;
+    background-color: rgba(255, 248, 232, 0.85); /* 半透明文字框 */
+}
+
+/* ===== 底部獎項 ===== */
+#portfolio p.award {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #372f3f;
+}
+
+
+/* Footer */
+footer {
+    background-color: #f0dee8;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+/* 其他區塊間距 */
+section {
+    padding: 6rem 1rem;
+}
